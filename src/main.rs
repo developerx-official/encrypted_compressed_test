@@ -1,4 +1,5 @@
 use bgzip::BGZFWriter;
+use libsw::Stopwatch;
 use ring::digest::{Context, SHA256};
 use serde::{Deserialize, Serialize};
 use serde_encrypt::serialize::impls::BincodeSerializer;
@@ -8,7 +9,6 @@ use serde_encrypt::EncryptedMessage;
 use std::fs;
 use std::fs::File;
 use std::io::{BufReader, Read, Write};
-use stopwatch::Stopwatch;
 
 const INPUT_FILE_PATH: &str = "input.file";
 const OUTPUT_FILE_PATH: &str = "output.file";
@@ -27,26 +27,33 @@ impl SerdeEncryptSharedKey for EncryptedFile {
 
 fn main() -> Result<(), anyhow::Error> {
     println!("Compressing and encrypting...");
-    let mut sw = Stopwatch::start_new();
+    let mut sw = Stopwatch::new();
+    sw.start()?;
     let compressed_data = compress_data(get_bytes_from_file(INPUT_FILE_PATH.to_string())?)?;
     let encrypted_data = encrypt_data_from_struct(EncryptedFile {
         content: compressed_data,
     })?;
     let mut f = File::create(OUTPUT_FILE_PATH)?;
     f.write_all(encrypted_data.as_slice())?;
-    sw.stop();
-    println!("Encrypted and compressed in {}ms!", sw.elapsed_ms());
+    sw.stop()?;
+    println!(
+        "Encrypted and compressed in {}ms!",
+        sw.elapsed().as_millis()
+    );
 
     println!("Decrypting and decompressing...");
     sw.reset();
-    sw.start();
+    sw.start()?;
     let decrypted_data =
         decrypt_to_struct_from_data(get_bytes_from_file(OUTPUT_FILE_PATH.to_string())?)?;
     let decompressed_data = decompress_data(decrypted_data.content)?;
     let mut f2 = File::create(DECRYPTED_AND_DECOMPRESSED_FILE_PATH)?;
     f2.write_all(decompressed_data.as_slice())?;
-    sw.stop();
-    println!("Decrypting and decompressing took {}ms!", sw.elapsed_ms());
+    sw.stop()?;
+    println!(
+        "Decrypting and decompressing took {}ms!",
+        sw.elapsed().as_millis()
+    );
     Ok(())
 }
 
