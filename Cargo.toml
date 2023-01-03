@@ -1,0 +1,13 @@
+[package]
+name = "encrypted_compressed_test"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bgzip = "0.2.2"
+flate2 = "1.0.25"
+anyhow = "1.0.68"
+stopwatch = "0.0.7"
+serde = { version = "1.0.152", features = ["derive"] }
+serde-encrypt = "0.7.0"
+ring = "0.16.20"
