@@ -10,4 +10,4 @@ anyhow = "1.0.68"
 serde = { version = "1.0.152", features = ["derive"] }
 serde-encrypt = "0.7.0"
 ring = "0.16.20"
-libsw = "2.1.1"
+libsw = "2.2.0"
