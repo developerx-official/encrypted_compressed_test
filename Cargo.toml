@@ -6,7 +6,7 @@ edition = "2021"
 [dependencies]
 bgzip = "0.2.2"
 flate2 = "1.0.25"
-anyhow = "1.0.68"
+anyhow = "1.0.69"
 serde = { version = "1.0.152", features = ["derive"] }
 serde-encrypt = "0.7.0"
 ring = "0.16.20"
