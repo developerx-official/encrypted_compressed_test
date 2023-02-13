@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-bgzip = "0.2.2"
+bgzip = "0.3.0"
 flate2 = "1.0.25"
 anyhow = "1.0.69"
 serde = { version = "1.0.152", features = ["derive"] }
