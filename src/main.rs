@@ -67,7 +67,7 @@ fn get_bytes_from_file(path: String) -> Result<Vec<u8>, anyhow::Error> {
 
 fn compress_data(input: Vec<u8>) -> Result<Vec<u8>, anyhow::Error> {
     let mut write_buffer = Vec::new();
-    let mut writer = BGZFWriter::new(&mut write_buffer, bzip::Compression::best());
+    let mut writer = BGZFWriter::new(&mut write_buffer, bgzip::Compression::best());
     writer.write_all(input.as_slice())?;
     writer.close()?;
     Ok(write_buffer)
