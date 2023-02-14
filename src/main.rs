@@ -1,5 +1,5 @@
 use bgzip::BGZFWriter;
-use libsw::Stopwatch;
+use libsw::Sw;
 use ring::digest::{Context, SHA256};
 use serde::{Deserialize, Serialize};
 use serde_encrypt::serialize::impls::BincodeSerializer;
@@ -27,7 +27,7 @@ impl SerdeEncryptSharedKey for EncryptedFile {
 
 fn main() -> Result<(), anyhow::Error> {
     println!("Compressing and encrypting...");
-    let mut sw = Stopwatch::new();
+    let mut sw = Sw::new();
     sw.start()?;
     let compressed_data = compress_data(get_bytes_from_file(INPUT_FILE_PATH.to_string())?)?;
     let encrypted_data = encrypt_data_from_struct(EncryptedFile {
