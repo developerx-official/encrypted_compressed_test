@@ -1,4 +1,4 @@
-use bgzip::{BGZFWriter, Compression};
+use bgzip::BGZFWriter;
 use libsw::Stopwatch;
 use ring::digest::{Context, SHA256};
 use serde::{Deserialize, Serialize};
