@@ -1,3 +1,6 @@
+#### ⚠ Archived, why not check out GnuPG or PGP? They're designed with this use case in mind, and this was really just a test anyways ^^'
+---
+
 # Encrypted Compressed Test
 An example project to demonstrate basic encryption, compression, and other introductionary concepts written entirely in Rust
 
